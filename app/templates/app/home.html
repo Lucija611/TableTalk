@@ -1,0 +1,38 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <h1>Restaurants</h1>
+
+    <form method="get">
+        <p>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" value="{{ request.GET.city }}">
+        </p>
+
+        <p>
+            <label for="min_ratio">Minimum positive ratio (0 to 1):</label>
+            <input type="text" name="min_ratio" id="min_ratio" value="{{ request.GET.min_ratio }}">
+        </p>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <hr>
+
+    {% for item in restaurant_data %}
+        <div style="border:1px solid #ccc; padding:15px; margin-bottom:15px;">
+            {% if item.restaurant.image %}
+                <img src="{{ item.restaurant.image.url }}" alt="{{ item.restaurant.name }}" style="max-width: 220px; height: auto;">
+            {% endif %}
+
+            <h2>{{ item.restaurant.name }}</h2>
+            <p><strong>Owner:</strong> {{ item.restaurant.owner.first_name }} {{ item.restaurant.owner.last_name }}</p>
+            <p>{{ item.restaurant.city }}, {{ item.restaurant.address }}</p>
+            <p>Positive : Negative = {{ item.positive_comments }} : {{ item.negative_comments }}</p>
+            <p>Positive ratio: {{ item.ratio|floatformat:2 }}</p>
+            <a href="/restaurants/{{ item.restaurant.id }}/">More</a>
+        </div>
+    {% empty %}
+        <p>No restaurants found.</p>
+    {% endfor %}
+{% endblock %}

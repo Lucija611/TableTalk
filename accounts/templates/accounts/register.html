@@ -1,0 +1,41 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <h1>Register</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <p>
+            <label for="{{ form.first_name.id_for_label }}">First name:</label>
+            {{ form.first_name }}
+        </p>
+
+        <p>
+            <label for="{{ form.last_name.id_for_label }}">Last name:</label>
+            {{ form.last_name }}
+        </p>
+
+        <p>
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+        </p>
+
+        <p>
+            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            {{ form.password1 }}
+        </p>
+
+        <p>
+            <label for="{{ form.password2.id_for_label }}">Repeat password:</label>
+            {{ form.password2 }}
+        </p>
+
+        <p>
+            <label for="{{ form.is_owner.id_for_label }}">Register as restaurant owner:</label>
+            {{ form.is_owner }}
+        </p>
+
+        <button type="submit">Register</button>
+    </form>
+{% endblock %}

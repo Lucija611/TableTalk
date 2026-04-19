@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TableTalk</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+
+        {% if user.is_authenticated %}
+            {% if user.profile.role == 'owner' %}
+                <a href="/restaurants/add/">Restaurant</a>
+                <a href="/statistics/">Statistics</a>
+            {% endif %}
+
+            <form method="post" action="/accounts/logout/" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+            <a href="/accounts/login/">Login</a>
+            <a href="/accounts/register/">Register</a>
+        {% endif %}
+    </nav>
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
