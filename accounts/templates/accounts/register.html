@@ -31,9 +31,9 @@
             {{ form.password2 }}
         </p>
 
-        <p>
-            <label for="{{ form.is_owner.id_for_label }}">Register as restaurant owner:</label>
+        <p class="checkbox-row">
             {{ form.is_owner }}
+            <label for="{{ form.is_owner.id_for_label }}">Register as restaurant owner</label>
         </p>
 
         <button type="submit">Register</button>

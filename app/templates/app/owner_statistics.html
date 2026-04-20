@@ -3,15 +3,20 @@
 {% block content %}
     <h1>Statistics for {{ restaurant.name }}</h1>
 
-    <div style="max-width: 700px; margin-bottom: 30px;">
+    <div class="stats-box">
+        <p><strong>Positive comments:</strong> {{ positive_comments }}</p>
+        <p><strong>Negative comments:</strong> {{ negative_comments }}</p>
+    </div>
+
+    <div class="chart-box">
         <canvas id="commentsLineChart"></canvas>
     </div>
 
-    <div style="max-width: 700px; margin-bottom: 30px;">
+    <div class="chart-box">
         <canvas id="ratioBarChart"></canvas>
     </div>
 
-    <div style="max-width: 450px; margin-bottom: 30px;">
+    <div class="chart-box pie-chart-box">
         <canvas id="sentimentPieChart"></canvas>
     </div>
 
@@ -34,6 +39,9 @@
                     label: 'Number of comments',
                     data: lineData
                 }]
+            },
+            options: {
+                animation: false
             }
         });
 
@@ -47,6 +55,7 @@
                 }]
             },
             options: {
+                animation: false,
                 scales: {
                     y: {
                         min: 0,
@@ -63,6 +72,9 @@
                 datasets: [{
                     data: [positiveComments, negativeComments]
                 }]
+            },
+            options: {
+                animation: false
             }
         });
     </script>

@@ -1,22 +1,23 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
-    <h1>{{ restaurant.name }}</h1>
+    <div class="card details-card">
+        <h1 class="details-title">{{ restaurant.name }}</h1>
 
-    {% if restaurant.image %}
-        <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}" style="max-width: 300px; height: auto;">
-    {% endif %}
+        {% if restaurant.image %}
+            <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}" class="details-image">
+        {% endif %}
 
-    <p><strong>Owner:</strong> {{ restaurant.owner.first_name }} {{ restaurant.owner.last_name }}</p>
-    <p><strong>City:</strong> {{ restaurant.city }}</p>
-    <p><strong>Address:</strong> {{ restaurant.address }}</p>
-    <p><strong>Description:</strong> {{ restaurant.description }}</p>
-
-    <p><strong>Positive comments:</strong> {{ positive_comments }}</p>
-    <p><strong>Negative comments:</strong> {{ negative_comments }}</p>
-    <p><strong>Positive ratio:</strong> {{ ratio|floatformat:2 }}</p>
-
-    <hr>
+        <div class="inline-info">
+            <p><strong>Owner:</strong> {{ restaurant.owner.first_name }} {{ restaurant.owner.last_name }}</p>
+            <p><strong>City:</strong> {{ restaurant.city }}</p>
+            <p><strong>Address:</strong> {{ restaurant.address }}</p>
+            <p>{{ restaurant.description }}</p>
+            <p><strong>Positive comments:</strong> {{ positive_comments }}</p>
+            <p><strong>Negative comments:</strong> {{ negative_comments }}</p>
+            <p><strong>Positive ratio:</strong> {{ ratio|floatformat:2 }}</p>
+        </div>
+    </div>
 
     {% if user.is_authenticated and user.profile.role == 'visitor' %}
         <h2>Add comment</h2>
@@ -31,20 +32,26 @@
 
             <button type="submit">Submit</button>
         </form>
-
-        <hr>
     {% endif %}
 
     <h2>Comments</h2>
 
     {% for comment in comments %}
-        <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        <div class="card">
             <p><strong>{{ comment.user.first_name }} {{ comment.user.last_name }}</strong></p>
             <p>{{ comment.text }}</p>
-            <p>{{ comment.sentiment }}</p>
-            <p><small>{{ comment.created_at|date:"d.m.Y." }}</small></p>
+            <p>
+                <span class="sentiment-emoji">
+                    {% if comment.sentiment == 1 %}
+                        👍
+                    {% else %}
+                        👎
+                    {% endif %}
+                </span>
+            </p>
+            <p class="small-text">{{ comment.created_at|date:"d.m.Y." }}</p>
         </div>
     {% empty %}
-        <p>No comments yet.</p>
+        <p class="empty-message">No comments yet.</p>
     {% endfor %}
 {% endblock %}

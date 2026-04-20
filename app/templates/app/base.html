@@ -1,31 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>TableTalk</title>
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
 </head>
 <body>
-    <nav>
-        <a href="/">Home</a>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="/" class="brand">TableTalk</a>
+        </div>
 
-        {% if user.is_authenticated %}
-            {% if user.profile.role == 'owner' %}
-                <a href="/restaurants/add/">Restaurant</a>
-                <a href="/statistics/">Statistics</a>
+        <div class="nav-right">
+            {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <a href="/admin/">Admin</a>
+                {% endif %}
+
+                {% if not user.is_superuser and user.profile.role == 'owner' %}
+                    <a href="/restaurants/add/">Restaurant</a>
+                    <a href="/statistics/">Statistics</a>
+                {% endif %}
+
+                <form method="post" action="/accounts/logout/" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="/accounts/login/">Login</a>
+                <a href="/accounts/register/">Register</a>
             {% endif %}
-
-            <form method="post" action="/accounts/logout/" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-        {% else %}
-            <a href="/accounts/login/">Login</a>
-            <a href="/accounts/register/">Register</a>
-        {% endif %}
+        </div>
     </nav>
-    <hr>
 
-    {% block content %}
-    {% endblock %}
+    <main class="page-container">
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>
