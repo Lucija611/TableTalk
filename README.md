@@ -49,14 +49,17 @@ AZURE_ENDPOINT_KEY = ...
 
 Visitor:  
 username: jamesh
+
 password: asdfasdf.1 
 
 Owner:  
 username: turner1
+
 password: asdfasdf.1
 
 Admin:  
 username: admin1  
+
 password: admin 
 
 ---
