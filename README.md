@@ -40,6 +40,7 @@ http://127.0.0.1:8000/
 Kako bi procjena sentimenta radila, potrebno je napraviti `.env` datoteku u rootu projekta:
 
 AZURE_ENDPOINT_URL = ...
+
 AZURE_ENDPOINT_KEY = ...
 
 ---
