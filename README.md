@@ -15,7 +15,7 @@ Komentari se šalju na ML model (Microsoft Azure) koji određuje je li komentar 
 1. Klonirati repozitorij:
 
 ```
-git clone <link_na_repo>  
+git clone https://github.com/Lucija611/TableTalk.git  
 cd TableTalk  
 ```
 
