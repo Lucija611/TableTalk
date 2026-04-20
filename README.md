@@ -14,18 +14,24 @@ Komentari se šalju na ML model (Microsoft Azure) koji određuje je li komentar 
 
 1. Klonirati repozitorij:
 
+```
 git clone <link_na_repo>  
 cd TableTalk  
+```
 
 2. Pokrenuti projekt:
 
+```
 python -m venv venv  
 source venv/Scripts/activate  
 pip install -r requirements.txt  
-python manage.py runserver  
+python manage.py runserver 
+``` 
 
-3. Otvoriti u browseru:  
+3. Otvoriti u browseru: 
+``` 
 http://127.0.0.1:8000/
+```
 
 ---
 
@@ -51,9 +57,6 @@ password: asdfasdf.1
 Admin:  
 username: admin1  
 password: admin 
-
-Admin panel:  
-http://127.0.0.1:8000/admin/
 
 ---
 
